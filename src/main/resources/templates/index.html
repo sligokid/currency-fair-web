@@ -157,7 +157,8 @@ window.onload = function(){
 	
 	// Register with SSE Server Sent Event publisher	
 	if (typeof (EventSource) !== "undefined" && !isIE() ) {
-        var source = new EventSource("http://localhost:8181/eirwig-spring-mvc/TwitterSample");
+        //var source = new EventSource("http://localhost:8181/eirwig-spring-mvc/TwitterSample");
+        var source = new EventSource("http://localhost:8181/tradestream");
         source.onmessage = function(event)  {
         	//document.getElementById("debug").innerHTML = event.data;
         	obj = JSON.parse(event.data);
