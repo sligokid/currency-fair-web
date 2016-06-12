@@ -5,11 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
-public class RunApplication {
+public class CurrencyFairWebApplication {
 
 	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(RunApplication.class, args);
-
+		ApplicationContext ctx = SpringApplication.run(CurrencyFairWebApplication.class, args);
 		System.out.println(ctx.toString());
 	}
 }
