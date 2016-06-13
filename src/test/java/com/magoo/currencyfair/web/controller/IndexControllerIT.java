@@ -1,4 +1,4 @@
-package com.magoo.currencyfair.web;
+package com.magoo.currencyfair.web.controller;
 
 import static org.junit.Assert.assertEquals;
 
@@ -16,11 +16,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 
+import com.magoo.currencyfair.web.CurrencyFairWebApplication;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = CurrencyFairWebApplication.class)
 @WebAppConfiguration
 @IntegrationTest({ "server.port=0" })
-public class IndexControllerTest {
+public class IndexControllerIT {
 
 	@Value("${local.server.port}")
 	private int port;
