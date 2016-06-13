@@ -16,8 +16,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 
-import com.magoo.currencyfair.web.CurrencyFairWebApplication;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = CurrencyFairWebApplication.class)
 @WebAppConfiguration
@@ -35,13 +33,20 @@ public class IndexControllerTest {
 	}
 
 	@Test
-	public void greeting() {
+	public void root_url_responds_with_200() throws Exception {
+		URL url = new URL("http://localhost:" + port + "/");
+
+		ResponseEntity<String> response = template.getForEntity(url.toString(), String.class);
+
+		assertEquals("200", response.getStatusCode().toString());
 	}
 
-	// @Test
-	public void index_page_renders_greeting() throws Exception {
-		URL url = new URL("http://localhost:" + port + "/");
+	@Test
+	public void index_url_responsds_with_200() throws Exception {
+		URL url = new URL("http://localhost:" + port + "/index");
+
 		ResponseEntity<String> response = template.getForEntity(url.toString(), String.class);
-		assertEquals(response.getBody(), "Greetings from Spring Boot!");
+
+		assertEquals("200", response.getStatusCode().toString());
 	}
 }
