@@ -35,7 +35,7 @@ public class IndexControllerIT {
 	}
 
 	@Test
-	public void root_url_responds_with_200() throws Exception {
+	public void root_endpoint_responds_with_200() throws Exception {
 		URL url = new URL("http://localhost:" + port + "/");
 
 		ResponseEntity<String> response = template.getForEntity(url.toString(), String.class);
@@ -44,7 +44,7 @@ public class IndexControllerIT {
 	}
 
 	@Test
-	public void index_url_responsds_with_200() throws Exception {
+	public void index_endpoint_responsds_with_200() throws Exception {
 		URL url = new URL("http://localhost:" + port + "/index");
 
 		ResponseEntity<String> response = template.getForEntity(url.toString(), String.class);
