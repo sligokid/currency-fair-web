@@ -1,8 +1,9 @@
 <html>
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<title>Global real-time trade heatmap</title>
+<title>Global real-time trade heatmap 2</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://www.currencyfair.com/cf-content/themes/cfwp/css/features.css" type="text/css" />
 <style>
 body, html {
 	margin: 0;
@@ -16,7 +17,7 @@ h1 {
 
 #main {
 	position: relative;
-	width: 1250px;
+	width: 1400px;
 	padding: 20px;
 	margin: auto;
 }
@@ -30,13 +31,17 @@ h1 {
 }
 
 #configArea {
+ 	overflow-y: auto;
 	position: relative;
 	float: left;
-	width: 200px;
-	padding: 15px;
-	padding-top: 0;
-	padding-right: 0;
+	width: 350px;
+	height: 600px;
+	padding-top: 0px;
+	padding-right: 0px;
+	border: 1px dashed black;
 }
+
+
 
 .btn {
 	margin-top: 25px;
@@ -76,19 +81,18 @@ h2 {
 	<div id="main">
 		<div id="heatmapArea"></div>
 		<div id="configArea">
-
+		
 		</div>
-
-		<div
-			style="position: absolute; width: 300px; top: 600px; left: 10px; text-align: center;">
-			<div id="tog" class="btn">Toggle HeatmapOverlay</div>
-			<div id="gen" class="btn">Add 5 random lat/lng coordinates</div>
+		<div style="position: absolute; width: 1030px; top: 600px; left: 10px; text-align: right;">
+			<div id="gen" class="btn"></div>
 			<br />
 			<a href="http://www.patrick-wied.at/static/heatmapjs/">heatmap.js</a>
 			by <a href="http://www.patrick-wied.at" target="_blank">Patrick
 				Wied</a>
+				
+			<div id="debug" style="position: absolute; width: 1200px; top: 100px; left: 10px; text-align: left; color:grey; font-size: x-small"></div>
 		</div>
-
+		
 	</div>
 	<script type="text/javascript" src="/js/heatmap.js"></script>
 	<script type="text/javascript" src="/js/heatmap-gmaps.js"></script>
@@ -126,23 +130,9 @@ window.onload = function(){
 		"gradient": { 0.45: "rgb(0,0,255)", 0.55: "rgb(0,255,255)", 0.65: "rgb(0,255,0)", 0.95: "yellow", 1.0: "rgb(255,0,0)" }
 		});
 	
-	// 5 random points button click
-	document.getElementById("gen").onclick = function(){
-		var x = 5;
-		while(x--){
-		
-			var lat = Math.random()*180;
-			var lng = Math.random()*180;
-			var count = Math.floor(Math.random()*180+1);
-			
-			heatmap.addDataPoint(lat,lng,count);
-		}
-	};
 	
-	// Toggle on / off button click
-	document.getElementById("tog").onclick = function(){
-		heatmap.toggle();
-	};
+	
+	
 	
 	var testData={
     		//max: 46,
@@ -160,9 +150,11 @@ window.onload = function(){
         //var source = new EventSource("http://localhost:8181/eirwig-spring-mvc/TwitterSample");
         var source = new EventSource("http://localhost:8181/tradestream");
         source.onmessage = function(event)  {
-        	//document.getElementById("debug").innerHTML = event.data;
+        	document.getElementById("debug").innerHTML = event.data;
         	obj = JSON.parse(event.data);
           	heatmap.addDataPoint(obj.lat, obj.lng, 1);
+        	document.getElementById("configArea").innerHTML += " Sell: " + obj.amountSell + " |<img src=\"/img/flags/" + obj.currencyFrom + ".gif\" style=\"vertical-align: bottom;\" >| / Buy: " 
+        																 + obj.amountBuy  + " [<img src=\"/img/flags/" + obj.currencyTo   + ".gif\" style=\"vertical-align: bottom;\" >| " + " @ [" + obj.rate + "] <br/>";
        	};
 	} else {
 		document.getElementById("configArea").innerHTML = "Sorry, your browser does not support server-sent events... #bummer";
@@ -177,5 +169,6 @@ window.onload = function(){
 };
 /*]]>*/
 </script>
+
 </body>
 </html>
