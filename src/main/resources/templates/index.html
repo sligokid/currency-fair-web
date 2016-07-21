@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-<title>Global real-time trade heatmap 2</title>
+<title>Global real-time currency trading</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="https://www.currencyfair.com/cf-content/themes/cfwp/css/features.css" type="text/css" />
 <link rel="stylesheet" href="/css/plain.css" type="text/css" />
@@ -107,7 +107,7 @@ window.onload = function(){
         		
         	
         	drawVolumeChart(obj);
-        	drawStatisticsChart();
+        	drawStatisticsChart(obj);
        	};
        	
        	
@@ -323,17 +323,22 @@ window.onload = function(){
     	chart.draw(data, options);
 	}
 	
-	function drawStatisticsChart() {
+	function drawStatisticsChart(obj) {
+		var     PROCESSED = parseInt(obj.PROCESSED);
+		var     LIVE = parseInt(obj.LIVE);
+		var     INVALID = parseInt(obj.INVALID);
+    	
+		
 	    var data = google.visualization.arrayToDataTable([
 	       ['Status', 'Trades', { role: 'style' } ],
-	       ['Processed', 1000, 
+	       ['Processed', PROCESSED, 
 	       	'color: #000000'],
-	       ['Live', 900, 
+	       ['Live', LIVE, 
 	       	'color: #A8A8A8'],
-	       ['Matched', 80, 
-	       	'color: 00CC33'],
-	       ['Invalid', 200, 
-	       'color: CC3333'],
+	       ['Matched', 0, 
+	       	'color: #00CC33'],
+	       ['Invalid', INVALID, 
+	       'color:  #CC3333'],
 	     ]);
 	     var options = {
 	       title: 'Market Statistics (Today)',
