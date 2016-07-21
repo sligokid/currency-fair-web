@@ -37,7 +37,8 @@
 			<div id="rbotArea">
 				<div id="barchart_3d" style="width: 300px; height: 180px;"></div>
 			</div>
-			<div id="rtopArea"></div>
+			<div id="rtopArea">
+			</div>
 		<div style="position: absolute; width: 1370px; top: 600px; left: 10px; text-align: right;">
 			<div id="gen" class="btn"></div>
 			<br />
@@ -59,9 +60,9 @@ window.onload = function(){
 	  //zoom: 7,
 	  zoom: 2,
 	  center: myLatlng,
-	  //mapTypeId: google.maps.MapTypeId.ROADMAP,
+	  mapTypeId: google.maps.MapTypeId.ROADMAP,
 	  //mapTypeId: google.maps.MapTypeId.SATELLITE,
-	  mapTypeId: google.maps.MapTypeId.HYBRID,
+	  //mapTypeId: google.maps.MapTypeId.HYBRID,
 	  disableDefaultUI: false,
 	  scrollwheel: false,
 	  draggable: false,
@@ -326,6 +327,7 @@ window.onload = function(){
 	function drawStatisticsChart(obj) {
 		var     PROCESSED = parseInt(obj.PROCESSED);
 		var     LIVE = parseInt(obj.LIVE);
+		var     MATCHED = parseInt(obj.MATCHED);
 		var     INVALID = parseInt(obj.INVALID);
     	
 		
@@ -335,7 +337,7 @@ window.onload = function(){
 	       	'color: #000000'],
 	       ['Live', LIVE, 
 	       	'color: #A8A8A8'],
-	       ['Matched', 0, 
+	       ['Matched', MATCHED, 
 	       	'color: #00CC33'],
 	       ['Invalid', INVALID, 
 	       'color:  #CC3333'],
