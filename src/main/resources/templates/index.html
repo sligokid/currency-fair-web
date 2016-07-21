@@ -31,11 +31,13 @@
 <body>
 	<div id="main">
 		<div id="heatmapArea"></div>
-			<div id="rtopArea"></div>
 			<div id="rmidArea">
 		 		<div id="piechart_3d" style="width: 300px; height: 180px;"></div>
 			</div>
-			<div id="rbotArea"></div>
+			<div id="rbotArea">
+				<div id="barchart_3d" style="width: 300px; height: 180px;"></div>
+			</div>
+			<div id="rtopArea"></div>
 		<div style="position: absolute; width: 1370px; top: 600px; left: 10px; text-align: right;">
 			<div id="gen" class="btn"></div>
 			<br />
@@ -87,7 +89,8 @@ window.onload = function(){
 	
 	// Register with SSE Server Sent Event publisher	
 	if (typeof (EventSource) !== "undefined" && !isIE() ) {
-        var source = new EventSource("http://ec2-52-16-13-114.eu-west-1.compute.amazonaws.com:8101/pub/tradestream");
+        //var source = new EventSource("http://ec2-52-16-13-114.eu-west-1.compute.amazonaws.com:8101/pub/tradestream");
+        var source = new EventSource("http://localhost:8101/pub/tradestream");
         source.onmessage = function(event)  {
         	document.getElementById("debug").innerHTML = event.data;
         	obj = JSON.parse(event.data);
@@ -102,200 +105,9 @@ window.onload = function(){
 
         	//{ "id": "321", "userId": "59222", "lat": 60.0, "lng": -95.0, "currencyFrom": "EUR", "currencyTo": "HKD", "amountBuy": "30725.2199", "amountSell": "3141.2546", "rate": "0.2580", "originatingCountry": "CA", "volume": "{EUR_CZK=11, CAD_CHF=6, GBP_DKK=8, EUR_DKK=7, EUR_CHF=10, EUR_HKD=7, AUD_CHF=10, GBP_CZK=7, EUR_GBP=5, EUR_CAD=11, EUR_AUD=6, GBP_HKD=9, AUD_CAD=14, GBP_AUD=9, GBP_CAD=5, GBP_CHF=10}" }
         		
-        	 var options = {
-                     title: 'Most Active Pairs (Volume)',
-                     is3D: true,
-                   };
-        	//var EUR_GBP = parseInt(obj.EUR_GBP);
         	
-        	var     AUD_CAD = parseInt(obj.AUD_CAD);
-        	var     AUD_CHF = parseInt(obj.AUD_CHF);
-        	var     AUD_JPY = parseInt(obj.AUD_JPY);
-        	var     AUD_NZD = parseInt(obj.AUD_NZD);
-        	var     AUD_USD = parseInt(obj.AUD_USD);
-        	var     BGN_RON = parseInt(obj.BGN_RON);
-        	var     CAD_CHF = parseInt(obj.CAD_CHF);
-        	var     CAD_JPY = parseInt(obj.CAD_JPY);
-        	var     CHF_BGN = parseInt(obj.CHF_BGN);
-        	var     CHF_JPY = parseInt(obj.CHF_JPY);
-        	var     CHF_RON = parseInt(obj.CHF_RON);
-        	var     CHF_TRY = parseInt(obj.CHF_TRY);
-        	var     EUR_AUD = parseInt(obj.EUR_AUD);
-        	var     EUR_CAD = parseInt(obj.EUR_CAD);
-        	var     EUR_CHF = parseInt(obj.EUR_CHF);
-        	var     EUR_CZK = parseInt(obj.EUR_CZK);
-        	var     EUR_DKK = parseInt(obj.EUR_DKK);
-        	var     EUR_GBP = parseInt(obj.EUR_GBP);
-        	var     EUR_HKD = parseInt(obj.EUR_HKD);
-        	var     EUR_HUF = parseInt(obj.EUR_HUF);
-        	var     EUR_ILS = parseInt(obj.EUR_ILS);
-        	var     EUR_JPY = parseInt(obj.EUR_JPY);
-        	var     EUR_MXN = parseInt(obj.EUR_MXN);
-        	var     EUR_NOK = parseInt(obj.EUR_NOK);
-        	var     EUR_NZD = parseInt(obj.EUR_NZD);
-        	var     EUR_PLN = parseInt(obj.EUR_PLN);
-        	var     EUR_RON = parseInt(obj.EUR_RON);
-        	var     EUR_RUB = parseInt(obj.EUR_RUB);
-        	var     EUR_SEK = parseInt(obj.EUR_SEK);
-        	var     EUR_SGD = parseInt(obj.EUR_SGD);
-        	var     EUR_TRY = parseInt(obj.EUR_TRY);
-        	var     EUR_USD = parseInt(obj.EUR_USD);
-        	var     EUR_ZAR = parseInt(obj.EUR_ZAR);
-        	var     GBP_AUD = parseInt(obj.GBP_AUD);
-        	var     GBP_BGN = parseInt(obj.GBP_BGN);
-        	var     GBP_CAD = parseInt(obj.GBP_CAD);
-        	var     GBP_CHF = parseInt(obj.GBP_CHF);
-        	var     GBP_CZK = parseInt(obj.GBP_CZK);
-        	var     GBP_DKK = parseInt(obj.GBP_DKK);
-        	var     GBP_HKD = parseInt(obj.GBP_HKD);
-        	var     GBP_HUF = parseInt(obj.GBP_HUF);
-        	var     GBP_JPY = parseInt(obj.GBP_JPY);
-        	var     GBP_NOK = parseInt(obj.GBP_NOK);
-        	var     GBP_NZD = parseInt(obj.GBP_NZD);
-        	var     GBP_PLN = parseInt(obj.GBP_PLN);
-        	var     GBP_RON = parseInt(obj.GBP_RON);
-        	var     GBP_SEK = parseInt(obj.GBP_SEK);
-        	var     GBP_SGD = parseInt(obj.GBP_SGD);
-        	var     GBP_TRY = parseInt(obj.GBP_TRY);
-        	var     GBP_USD = parseInt(obj.GBP_USD);
-        	var     GBP_ZAR = parseInt(obj.GBP_ZAR);
-        	var     HKD_JPY = parseInt(obj.HKD_JPY);
-        	var     NZD_CAD = parseInt(obj.NZD_CAD);
-        	var     NZD_CHF = parseInt(obj.NZD_CHF);
-        	var     NZD_JPY = parseInt(obj.NZD_JPY);
-        	var     NZD_USD = parseInt(obj.NZD_USD);
-        	var     SGD_HKD = parseInt(obj.SGD_HKD);
-        	var     SGD_JPY = parseInt(obj.SGD_JPY);
-        	var     TRY_BGN = parseInt(obj.TRY_BGN);
-        	var     TRY_JPY = parseInt(obj.TRY_JPY);
-        	var     TRY_RON = parseInt(obj.TRY_RON);
-        	var     USD_BGN = parseInt(obj.USD_BGN);
-        	var     USD_CAD = parseInt(obj.USD_CAD);
-        	var     USD_CHF = parseInt(obj.USD_CHF);
-        	var     USD_CZK = parseInt(obj.USD_CZK);
-        	var     USD_DKK = parseInt(obj.USD_DKK);
-        	var     USD_HKD = parseInt(obj.USD_HKD);
-        	var     USD_HUF = parseInt(obj.USD_HUF);
-        	var     USD_ILS = parseInt(obj.USD_ILS);
-        	var     USD_JPY = parseInt(obj.USD_JPY);
-        	var     USD_MXN = parseInt(obj.USD_MXN);
-        	var     USD_NOK = parseInt(obj.USD_NOK);
-        	var     USD_PLN = parseInt(obj.USD_PLN);
-        	var     USD_RON = parseInt(obj.USD_RON);
-        	var     USD_RUB = parseInt(obj.USD_RUB);
-        	var     USD_SEK = parseInt(obj.USD_SEK);
-        	var     USD_SGD = parseInt(obj.USD_SGD);
-        	var     USD_TRY = parseInt(obj.USD_TRY);
-        	var     USD_ZAR = parseInt(obj.USD_ZAR);
-        	
-        	
-        	//alert(EUR_GBP);
-        	//alert(obj.volume)
-        	
-        	var array = [
-                      	['Pair', 'Volume'],
-                      	['AUD_CAD',             AUD_CAD],
-                      	['AUD_CHF',             AUD_CHF],
-                      	['AUD_JPY',             AUD_JPY],
-                      	['AUD_NZD',             AUD_NZD],
-                      	['AUD_USD',             AUD_USD],
-                      	['BGN_RON',             BGN_RON],
-                      	['CAD_CHF',             CAD_CHF],
-                      	['CAD_JPY',             CAD_JPY],
-                      	['CHF_BGN',             CHF_BGN],
-                      	['CHF_JPY',             CHF_JPY],
-                      	['CHF_RON',             CHF_RON],
-                      	['CHF_TRY',             CHF_TRY],
-                      	['EUR_AUD',             EUR_AUD],
-                      	['EUR_CAD',             EUR_CAD],
-                      	['EUR_CHF',             EUR_CHF],
-                      	['EUR_CZK',             EUR_CZK],
-                      	['EUR_DKK',             EUR_DKK],
-                      	['EUR_GBP',             EUR_GBP],
-                      	['EUR_HKD',             EUR_HKD],
-                      	['EUR_HUF',             EUR_HUF],
-                      	['EUR_ILS',             EUR_ILS],
-                      	['EUR_JPY',             EUR_JPY],
-                      	['EUR_MXN',             EUR_MXN],
-                      	['EUR_NOK',             EUR_NOK],
-                      	['EUR_NZD',             EUR_NZD],
-                      	['EUR_PLN',             EUR_PLN],
-                      	['EUR_RON',             EUR_RON],
-                      	['EUR_RUB',             EUR_RUB],
-                      	['EUR_SEK',             EUR_SEK],
-                      	['EUR_SGD',             EUR_SGD],
-                      	['EUR_TRY',             EUR_TRY],
-                      	['EUR_USD',             EUR_USD],
-                      	['EUR_ZAR',             EUR_ZAR],
-                      	['GBP_AUD',             GBP_AUD],
-                      	['GBP_BGN',             GBP_BGN],
-                      	['GBP_CAD',             GBP_CAD],
-                      	['GBP_CHF',             GBP_CHF],
-                      	['GBP_CZK',             GBP_CZK],
-                      	['GBP_DKK',             GBP_DKK],
-                      	['GBP_HKD',             GBP_HKD],
-                      	['GBP_HUF',             GBP_HUF],
-                      	['GBP_JPY',             GBP_JPY],
-                      	['GBP_NOK',             GBP_NOK],
-                      	['GBP_NZD',             GBP_NZD],
-                      	['GBP_PLN',             GBP_PLN],
-                      	['GBP_RON',             GBP_RON],
-                      	['GBP_SEK',             GBP_SEK],
-                      	['GBP_SGD',             GBP_SGD],
-                      	['GBP_TRY',             GBP_TRY],
-                      	['GBP_USD',             GBP_USD],
-                      	['GBP_ZAR',             GBP_ZAR],
-                      	['HKD_JPY',             HKD_JPY],
-                      	['NZD_CAD',             NZD_CAD],
-                      	['NZD_CHF',             NZD_CHF],
-                      	['NZD_JPY',             NZD_JPY],
-                      	['NZD_USD',             NZD_USD],
-                      	['SGD_HKD',             SGD_HKD],
-                      	['SGD_JPY',             SGD_JPY],
-                      	['TRY_BGN',             TRY_BGN],
-                      	['TRY_JPY',             TRY_JPY],
-                      	['TRY_RON',             TRY_RON],
-                      	['USD_BGN',             USD_BGN],
-                      	['USD_CAD',             USD_CAD],
-                      	['USD_CHF',             USD_CHF],
-                      	['USD_CZK',             USD_CZK],
-                      	['USD_DKK',             USD_DKK],
-                      	['USD_HKD',             USD_HKD],
-                      	['USD_HUF',             USD_HUF],
-                      	['USD_ILS',             USD_ILS],
-                      	['USD_JPY',             USD_JPY],
-                      	['USD_MXN',             USD_MXN],
-                      	['USD_NOK',             USD_NOK],
-                      	['USD_PLN',             USD_PLN],
-                      	['USD_RON',             USD_RON],
-                      	['USD_RUB',             USD_RUB],
-                      	['USD_SEK',             USD_SEK],
-                      	['USD_SGD',             USD_SGD],
-                      	['USD_TRY',             USD_TRY],
-                      	['USD_ZAR',             USD_ZAR]
-
-                    ];
-        	 var data = google.visualization.arrayToDataTable(array);
-        	//var map = obj.volume;
-        	//var myMap = new Map(map);
-        	//var l = myMap.get(EUR_GBP);
-        	//alert(myMap);
-
-        	//if ("EUR_GBP" in obj.volume) {
-        	//	alert("YRS");
-        	//}
-        	//for (var k in map){
-        	//    if (map.hasOwnProperty(k)) {
-        	//         //alert("Key is " + k + ", value is" + map[k]);
-        	//    }
-        	//}
-        	
-        	//var array = JSON.parse("["+JSON.stringify(map).replace(/(^\{)|(\}$)|("[^"]*[^\\]":)/g,'')+"]")
-        	
-        	//alert(array);
-			//var data = google.visualization.arrayToDataTable(array, false);
-			var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-        	chart.draw(data, options);
+        	drawVolumeChart(obj);
+        	drawStatisticsChart();
        	};
        	
        	
@@ -313,7 +125,227 @@ window.onload = function(){
 		document.getElementById("rtopArea").innerHTML += "<img src=\"/img/compatible_safari.gif\" width=\"28\" height=\"30\" alt=\"Safari\" title=\"Safari\">";
 	}
 	
+	function drawVolumeChart(obj) {
+		 var options = {
+                 title: 'Most Active Pairs (Volume)',
+                 chartArea: {width: '70%'},
+                 is3D: true,
+               };
+    	//var EUR_GBP = parseInt(obj.EUR_GBP);
+    	
+    	var     AUD_CAD = parseInt(obj.AUD_CAD);
+    	var     AUD_CHF = parseInt(obj.AUD_CHF);
+    	var     AUD_JPY = parseInt(obj.AUD_JPY);
+    	var     AUD_NZD = parseInt(obj.AUD_NZD);
+    	var     AUD_USD = parseInt(obj.AUD_USD);
+    	var     BGN_RON = parseInt(obj.BGN_RON);
+    	var     CAD_CHF = parseInt(obj.CAD_CHF);
+    	var     CAD_JPY = parseInt(obj.CAD_JPY);
+    	var     CHF_BGN = parseInt(obj.CHF_BGN);
+    	var     CHF_JPY = parseInt(obj.CHF_JPY);
+    	var     CHF_RON = parseInt(obj.CHF_RON);
+    	var     CHF_TRY = parseInt(obj.CHF_TRY);
+    	var     EUR_AUD = parseInt(obj.EUR_AUD);
+    	var     EUR_CAD = parseInt(obj.EUR_CAD);
+    	var     EUR_CHF = parseInt(obj.EUR_CHF);
+    	var     EUR_CZK = parseInt(obj.EUR_CZK);
+    	var     EUR_DKK = parseInt(obj.EUR_DKK);
+    	var     EUR_GBP = parseInt(obj.EUR_GBP);
+    	var     EUR_HKD = parseInt(obj.EUR_HKD);
+    	var     EUR_HUF = parseInt(obj.EUR_HUF);
+    	var     EUR_ILS = parseInt(obj.EUR_ILS);
+    	var     EUR_JPY = parseInt(obj.EUR_JPY);
+    	var     EUR_MXN = parseInt(obj.EUR_MXN);
+    	var     EUR_NOK = parseInt(obj.EUR_NOK);
+    	var     EUR_NZD = parseInt(obj.EUR_NZD);
+    	var     EUR_PLN = parseInt(obj.EUR_PLN);
+    	var     EUR_RON = parseInt(obj.EUR_RON);
+    	var     EUR_RUB = parseInt(obj.EUR_RUB);
+    	var     EUR_SEK = parseInt(obj.EUR_SEK);
+    	var     EUR_SGD = parseInt(obj.EUR_SGD);
+    	var     EUR_TRY = parseInt(obj.EUR_TRY);
+    	var     EUR_USD = parseInt(obj.EUR_USD);
+    	var     EUR_ZAR = parseInt(obj.EUR_ZAR);
+    	var     GBP_AUD = parseInt(obj.GBP_AUD);
+    	var     GBP_BGN = parseInt(obj.GBP_BGN);
+    	var     GBP_CAD = parseInt(obj.GBP_CAD);
+    	var     GBP_CHF = parseInt(obj.GBP_CHF);
+    	var     GBP_CZK = parseInt(obj.GBP_CZK);
+    	var     GBP_DKK = parseInt(obj.GBP_DKK);
+    	var     GBP_HKD = parseInt(obj.GBP_HKD);
+    	var     GBP_HUF = parseInt(obj.GBP_HUF);
+    	var     GBP_JPY = parseInt(obj.GBP_JPY);
+    	var     GBP_NOK = parseInt(obj.GBP_NOK);
+    	var     GBP_NZD = parseInt(obj.GBP_NZD);
+    	var     GBP_PLN = parseInt(obj.GBP_PLN);
+    	var     GBP_RON = parseInt(obj.GBP_RON);
+    	var     GBP_SEK = parseInt(obj.GBP_SEK);
+    	var     GBP_SGD = parseInt(obj.GBP_SGD);
+    	var     GBP_TRY = parseInt(obj.GBP_TRY);
+    	var     GBP_USD = parseInt(obj.GBP_USD);
+    	var     GBP_ZAR = parseInt(obj.GBP_ZAR);
+    	var     HKD_JPY = parseInt(obj.HKD_JPY);
+    	var     NZD_CAD = parseInt(obj.NZD_CAD);
+    	var     NZD_CHF = parseInt(obj.NZD_CHF);
+    	var     NZD_JPY = parseInt(obj.NZD_JPY);
+    	var     NZD_USD = parseInt(obj.NZD_USD);
+    	var     SGD_HKD = parseInt(obj.SGD_HKD);
+    	var     SGD_JPY = parseInt(obj.SGD_JPY);
+    	var     TRY_BGN = parseInt(obj.TRY_BGN);
+    	var     TRY_JPY = parseInt(obj.TRY_JPY);
+    	var     TRY_RON = parseInt(obj.TRY_RON);
+    	var     USD_BGN = parseInt(obj.USD_BGN);
+    	var     USD_CAD = parseInt(obj.USD_CAD);
+    	var     USD_CHF = parseInt(obj.USD_CHF);
+    	var     USD_CZK = parseInt(obj.USD_CZK);
+    	var     USD_DKK = parseInt(obj.USD_DKK);
+    	var     USD_HKD = parseInt(obj.USD_HKD);
+    	var     USD_HUF = parseInt(obj.USD_HUF);
+    	var     USD_ILS = parseInt(obj.USD_ILS);
+    	var     USD_JPY = parseInt(obj.USD_JPY);
+    	var     USD_MXN = parseInt(obj.USD_MXN);
+    	var     USD_NOK = parseInt(obj.USD_NOK);
+    	var     USD_PLN = parseInt(obj.USD_PLN);
+    	var     USD_RON = parseInt(obj.USD_RON);
+    	var     USD_RUB = parseInt(obj.USD_RUB);
+    	var     USD_SEK = parseInt(obj.USD_SEK);
+    	var     USD_SGD = parseInt(obj.USD_SGD);
+    	var     USD_TRY = parseInt(obj.USD_TRY);
+    	var     USD_ZAR = parseInt(obj.USD_ZAR);
+    	
+    	
+    	//alert(EUR_GBP);
+    	//alert(obj.volume)
+    	
+    	var array = [
+                  	['Pair', 'Volume'],
+                  	['AUD_CAD',             AUD_CAD],
+                  	['AUD_CHF',             AUD_CHF],
+                  	['AUD_JPY',             AUD_JPY],
+                  	['AUD_NZD',             AUD_NZD],
+                  	['AUD_USD',             AUD_USD],
+                  	['BGN_RON',             BGN_RON],
+                  	['CAD_CHF',             CAD_CHF],
+                  	['CAD_JPY',             CAD_JPY],
+                  	['CHF_BGN',             CHF_BGN],
+                  	['CHF_JPY',             CHF_JPY],
+                  	['CHF_RON',             CHF_RON],
+                  	['CHF_TRY',             CHF_TRY],
+                  	['EUR_AUD',             EUR_AUD],
+                  	['EUR_CAD',             EUR_CAD],
+                  	['EUR_CHF',             EUR_CHF],
+                  	['EUR_CZK',             EUR_CZK],
+                  	['EUR_DKK',             EUR_DKK],
+                  	['EUR_GBP',             EUR_GBP],
+                  	['EUR_HKD',             EUR_HKD],
+                  	['EUR_HUF',             EUR_HUF],
+                  	['EUR_ILS',             EUR_ILS],
+                  	['EUR_JPY',             EUR_JPY],
+                  	['EUR_MXN',             EUR_MXN],
+                  	['EUR_NOK',             EUR_NOK],
+                  	['EUR_NZD',             EUR_NZD],
+                  	['EUR_PLN',             EUR_PLN],
+                  	['EUR_RON',             EUR_RON],
+                  	['EUR_RUB',             EUR_RUB],
+                  	['EUR_SEK',             EUR_SEK],
+                  	['EUR_SGD',             EUR_SGD],
+                  	['EUR_TRY',             EUR_TRY],
+                  	['EUR_USD',             EUR_USD],
+                  	['EUR_ZAR',             EUR_ZAR],
+                  	['GBP_AUD',             GBP_AUD],
+                  	['GBP_BGN',             GBP_BGN],
+                  	['GBP_CAD',             GBP_CAD],
+                  	['GBP_CHF',             GBP_CHF],
+                  	['GBP_CZK',             GBP_CZK],
+                  	['GBP_DKK',             GBP_DKK],
+                  	['GBP_HKD',             GBP_HKD],
+                  	['GBP_HUF',             GBP_HUF],
+                  	['GBP_JPY',             GBP_JPY],
+                  	['GBP_NOK',             GBP_NOK],
+                  	['GBP_NZD',             GBP_NZD],
+                  	['GBP_PLN',             GBP_PLN],
+                  	['GBP_RON',             GBP_RON],
+                  	['GBP_SEK',             GBP_SEK],
+                  	['GBP_SGD',             GBP_SGD],
+                  	['GBP_TRY',             GBP_TRY],
+                  	['GBP_USD',             GBP_USD],
+                  	['GBP_ZAR',             GBP_ZAR],
+                  	['HKD_JPY',             HKD_JPY],
+                  	['NZD_CAD',             NZD_CAD],
+                  	['NZD_CHF',             NZD_CHF],
+                  	['NZD_JPY',             NZD_JPY],
+                  	['NZD_USD',             NZD_USD],
+                  	['SGD_HKD',             SGD_HKD],
+                  	['SGD_JPY',             SGD_JPY],
+                  	['TRY_BGN',             TRY_BGN],
+                  	['TRY_JPY',             TRY_JPY],
+                  	['TRY_RON',             TRY_RON],
+                  	['USD_BGN',             USD_BGN],
+                  	['USD_CAD',             USD_CAD],
+                  	['USD_CHF',             USD_CHF],
+                  	['USD_CZK',             USD_CZK],
+                  	['USD_DKK',             USD_DKK],
+                  	['USD_HKD',             USD_HKD],
+                  	['USD_HUF',             USD_HUF],
+                  	['USD_ILS',             USD_ILS],
+                  	['USD_JPY',             USD_JPY],
+                  	['USD_MXN',             USD_MXN],
+                  	['USD_NOK',             USD_NOK],
+                  	['USD_PLN',             USD_PLN],
+                  	['USD_RON',             USD_RON],
+                  	['USD_RUB',             USD_RUB],
+                  	['USD_SEK',             USD_SEK],
+                  	['USD_SGD',             USD_SGD],
+                  	['USD_TRY',             USD_TRY],
+                  	['USD_ZAR',             USD_ZAR]
+
+                ];
+    	 var data = google.visualization.arrayToDataTable(array);
+    	//var map = obj.volume;
+    	//var myMap = new Map(map);
+    	//var l = myMap.get(EUR_GBP);
+    	//alert(myMap);
+
+    	//if ("EUR_GBP" in obj.volume) {
+    	//	alert("YRS");
+    	//}
+    	//for (var k in map){
+    	//    if (map.hasOwnProperty(k)) {
+    	//         //alert("Key is " + k + ", value is" + map[k]);
+    	//    }
+    	//}
+    	
+    	//var array = JSON.parse("["+JSON.stringify(map).replace(/(^\{)|(\}$)|("[^"]*[^\\]":)/g,'')+"]")
+    	
+    	//alert(array);
+		//var data = google.visualization.arrayToDataTable(array, false);
+		var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+    	chart.draw(data, options);
+	}
+	
+	function drawStatisticsChart() {
+	    var data = google.visualization.arrayToDataTable([
+	       ['Status', 'Trades', { role: 'style' } ],
+	       ['Processed', 1000, 
+	       	'color: #000000'],
+	       ['Live', 900, 
+	       	'color: #A8A8A8'],
+	       ['Matched', 80, 
+	       	'color: 00CC33'],
+	       ['Invalid', 200, 
+	       'color: CC3333'],
+	     ]);
+	     var options = {
+	       title: 'Market Statistics (Today)',
+	       chartArea: {width: '70%'},
+	     };
+	     var chart = new google.visualization.BarChart(document.getElementById('barchart_3d'));
+	     chart.draw(data, options);
+	   }
+	
 };
+
+
 /*]]>*/
 </script>
 
