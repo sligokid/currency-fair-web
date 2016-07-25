@@ -1,6 +1,8 @@
 # trade-engine-web
 Spring Boot microservice web frontend rendering reports (2016)
 
+![web-diagram](https://cloud.githubusercontent.com/assets/6519496/17114720/09428b46-52a8-11e6-9622-3b5f8d85ffca.png)
+
 http://ec2-52-16-13-114.eu-west-1.compute.amazonaws.com:8100/
 
 
