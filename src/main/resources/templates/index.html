@@ -54,10 +54,8 @@ var heatmap;
 
 window.onload = function(){
 
-	//var myLatlng = new google.maps.LatLng(48.3333, 16.35);
 	var myLatlng = new google.maps.LatLng(53.41291, -8.24389);
 	var myOptions = {
-	  //zoom: 7,
 	  zoom: 2,
 	  center: myLatlng,
 	  mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -103,19 +101,9 @@ window.onload = function(){
         		" @ [" + obj.rate + "] <br/>"
         		+ document.getElementById("rtopArea").innerHTML;
         		
-
-        	//{ "id": "321", "userId": "59222", "lat": 60.0, "lng": -95.0, "currencyFrom": "EUR", "currencyTo": "HKD", "amountBuy": "30725.2199", "amountSell": "3141.2546", "rate": "0.2580", "originatingCountry": "CA", "volume": "{EUR_CZK=11, CAD_CHF=6, GBP_DKK=8, EUR_DKK=7, EUR_CHF=10, EUR_HKD=7, AUD_CHF=10, GBP_CZK=7, EUR_GBP=5, EUR_CAD=11, EUR_AUD=6, GBP_HKD=9, AUD_CAD=14, GBP_AUD=9, GBP_CAD=5, GBP_CHF=10}" }
-        		
-        	
         	drawVolumeChart(obj);
         	drawStatisticsChart(obj);
        	};
-       	
-       	
-       
-              
-              
-     
 	} else {
 		document.getElementById("rtopArea").innerHTML = "Sorry, your browser does not support server-sent events... #bummer";
 		document.getElementById("rtopArea").innerHTML += "<br>";
@@ -132,7 +120,6 @@ window.onload = function(){
                  chartArea: {width: '70%'},
                  is3D: true,
                };
-    	//var EUR_GBP = parseInt(obj.EUR_GBP);
     	
     	var     AUD_CAD = parseInt(obj.AUD_CAD);
     	var     AUD_CHF = parseInt(obj.AUD_CHF);
@@ -213,10 +200,6 @@ window.onload = function(){
     	var     USD_SGD = parseInt(obj.USD_SGD);
     	var     USD_TRY = parseInt(obj.USD_TRY);
     	var     USD_ZAR = parseInt(obj.USD_ZAR);
-    	
-    	
-    	//alert(EUR_GBP);
-    	//alert(obj.volume)
     	
     	var array = [
                   	['Pair', 'Volume'],
@@ -301,25 +284,7 @@ window.onload = function(){
                   	['USD_ZAR',             USD_ZAR]
 
                 ];
-    	 var data = google.visualization.arrayToDataTable(array);
-    	//var map = obj.volume;
-    	//var myMap = new Map(map);
-    	//var l = myMap.get(EUR_GBP);
-    	//alert(myMap);
-
-    	//if ("EUR_GBP" in obj.volume) {
-    	//	alert("YRS");
-    	//}
-    	//for (var k in map){
-    	//    if (map.hasOwnProperty(k)) {
-    	//         //alert("Key is " + k + ", value is" + map[k]);
-    	//    }
-    	//}
-    	
-    	//var array = JSON.parse("["+JSON.stringify(map).replace(/(^\{)|(\}$)|("[^"]*[^\\]":)/g,'')+"]")
-    	
-    	//alert(array);
-		//var data = google.visualization.arrayToDataTable(array, false);
+    	var data = google.visualization.arrayToDataTable(array);
 		var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
     	chart.draw(data, options);
 	}
