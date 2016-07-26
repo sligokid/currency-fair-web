@@ -32,10 +32,14 @@
 	<div id="main">
 		<div id="heatmapArea"></div>
 			<div id="rmidArea">
-		 		<div id="piechart_3d" style="width: 300px; height: 180px;"></div>
+		 		<div id="piechart_3d" style="width: 300px; height: 180px;">
+		 			<img alt="loading" src="img/loading.gif" width="300" />
+		 		</div>
 			</div>
 			<div id="rbotArea">
-				<div id="barchart_3d" style="width: 300px; height: 180px;"></div>
+				<div id="barchart_3d" style="width: 300px; height: 180px;">
+	 				<img alt="loading" src="img/loading.gif" width="300" />
+				</div>
 			</div>
 			<div id="rtopArea">
 			</div>
@@ -88,8 +92,8 @@ window.onload = function(){
 	
 	// Register with SSE Server Sent Event publisher	
 	if (typeof (EventSource) !== "undefined" && !isIE() ) {
-        var source = new EventSource("http://ec2-52-16-13-114.eu-west-1.compute.amazonaws.com:8101/pub/tradestream");
-        //var source = new EventSource("http://localhost:8101/pub/tradestream");
+        //var source = new EventSource("http://ec2-52-16-13-114.eu-west-1.compute.amazonaws.com:8101/pub/tradestream");
+        var source = new EventSource("http://localhost:8101/pub/tradestream");
         source.onmessage = function(event)  {
         	document.getElementById("debug").innerHTML = event.data;
         	obj = JSON.parse(event.data);
