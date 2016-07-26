@@ -1,4 +1,4 @@
-# trade-engine-web
+# trade-engine-web [![Build Status](https://travis-ci.org/sligokid/trade-engine-web.svg?branch=develop)](https://travis-ci.org/sligokid/trade-engine-web)
 Spring Boot microservice web frontend rendering reports (2016)
 
 ## Table of Contents
