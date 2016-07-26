@@ -6,6 +6,7 @@ Spring Boot microservice web frontend rendering reports (2016)
   - [Overview](#overview)
   - [Architecture](#architecture)
   - [Demo](#demo)
+  - [Install](#install)
 
 ## Introduction
 
@@ -25,3 +26,11 @@ http://ec2-52-16-13-114.eu-west-1.compute.amazonaws.com:8100/
 - Google Maps API https://google-developers.appspot.com/maps/
 - Google Charts API https://google-developers.appspot.com/chart/
 - Heatmap.js by https://www.patrick-wied.at/static/heatmapjs/
+
+#Install
+
+``` bash
+   $ git clone https://github.com/sligokid/trade-engine-web.git
+   $ mvn clean package
+   $ mvn spring-boot:run
+```
