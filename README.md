@@ -31,6 +31,7 @@ http://ec2-52-16-13-114.eu-west-1.compute.amazonaws.com:8100/
 
 ``` bash
    $ git clone https://github.com/sligokid/trade-engine-web.git
+   $ cd trade-engine-web
    $ mvn clean package
    $ mvn spring-boot:run
 ```
